@@ -6,17 +6,20 @@
 package fr.insset.l3.dessin_colab;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Mathieu
  */
 @Entity
-public class Forme implements Serializable {
+public class Dessin implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,10 +44,10 @@ public class Forme implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Forme)) {
+        if (!(object instanceof Dessin)) {
             return false;
         }
-        Forme other = (Forme) object;
+        Dessin other = (Dessin) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -53,14 +56,16 @@ public class Forme implements Serializable {
 
     @Override
     public String toString() {
-        return "x : " + x + "y : " + y + "color : " + color;
+        return "fr.insset.l3.dessin_colab.Dessin[ id=" + id + " ]";
     }
     
     private int Id;
-    private float x;
-    private float y;
-    private int color;
-    private float width ;
-    private float height;
-    private float radius;
+    private String Date_creation;
+    @OneToMany
+    private List<Forme> Liste_elements;
+    private String Name;
+    private String IdentifiantProprietaire;
+    @OneToOne
+    private Groupe Groupe;
+    
 }
